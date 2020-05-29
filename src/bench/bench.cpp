@@ -1,19 +1,16 @@
-// Copyright (c) 2015-2019 The Bitcoin Core developers
+// Copyright (c) 2015-2017 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <bench/bench.h>
+#include <bench/perf.h>
 
-#include <chainparams.h>
-#include <test/setup_common.h>
-#include <validation.h>
-
-#include <algorithm>
 #include <assert.h>
-#include <iomanip>
 #include <iostream>
-#include <numeric>
+#include <iomanip>
+#include <algorithm>
 #include <regex>
+#include <numeric>
 
 void benchmark::ConsolePrinter::header()
 {
@@ -99,6 +96,7 @@ benchmark::BenchRunner::BenchRunner(std::string name, benchmark::BenchFunction f
 
 void benchmark::BenchRunner::RunAll(Printer& printer, uint64_t num_evals, double scaling, const std::string& filter, bool is_list_only)
 {
+    perf_init();
     if (!std::ratio_less_equal<benchmark::clock::period, std::micro>::value) {
         std::cerr << "WARNING: Clock precision is worse than microsecond - benchmarks may be less accurate!\n";
     }
@@ -112,14 +110,6 @@ void benchmark::BenchRunner::RunAll(Printer& printer, uint64_t num_evals, double
     printer.header();
 
     for (const auto& p : benchmarks()) {
-        TestingSetup test{CBaseChainParams::REGTEST};
-        {
-            LOCK(cs_main);
-            assert(::ChainActive().Height() == 0);
-            const bool witness_enabled{IsWitnessEnabled(::ChainActive().Tip(), Params().GetConsensus())};
-            assert(witness_enabled);
-        }
-
         if (!std::regex_match(p.first, baseMatch, reFilter)) {
             continue;
         }
@@ -136,6 +126,8 @@ void benchmark::BenchRunner::RunAll(Printer& printer, uint64_t num_evals, double
     }
 
     printer.footer();
+
+    perf_fini();
 }
 
 bool benchmark::State::UpdateTimer(const benchmark::time_point current_time)

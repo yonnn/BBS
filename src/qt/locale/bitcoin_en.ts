@@ -4435,6 +4435,16 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of &quot;100 satos
         <source>Copyright (C) %i-%i</source>
         <translation type="unfinished"></translation>
     </message>
+	<message>
+        <location line="+1"/>
+        <source>Copyright (C) %i</source>
+        <translation type="unfinished"></translation>
+    </message>
+	<message>
+        <location line="+1"/>
+        <source>The Bitcoin Core developers</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <location line="+1"/>
         <source>Corrupted block database detected</source>

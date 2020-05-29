@@ -3441,6 +3441,14 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis p
         <source>Copyright (C) %i-%i</source>
         <translation>Авторское право (©) %i-%i</translation>
     </message>
+	<message>
+        <source>Copyright (C) %i</source>
+        <translation>Авторское право (©) %i</translation>
+    </message>
+	<message>
+        <source>The Bitcoin Core developers</source>
+        <translation>Разработчики Bitcoin Core</translation>
+    </message>
     <message>
         <source>Corrupted block database detected</source>
         <translation>БД блоков повреждена</translation>
