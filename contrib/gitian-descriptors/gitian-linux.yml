@@ -29,7 +29,7 @@ packages:
 - "python"
 remotes:
 - "url": "https://github.com/Blockchain-Solutions-BCS/BBS.git"
-  "dir": "bitcoinbs"
+  "dir": "BBS"
 files: []
 script: |
 
